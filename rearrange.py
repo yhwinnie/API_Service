@@ -2,10 +2,11 @@ import sys
 import random
 
 
-arr = []
+
+arguments = sys.argv[1:]
 
 def rearrange_words():
-    arguments = sys.argv[1:]
+    result_arr = []
     index_list = []
     while len(index_list) != len(arguments):
         rand_index = random.randint(0, len(arguments) - 1)
@@ -13,9 +14,9 @@ def rearrange_words():
             index_list.append(rand_index)
             get_word = arguments[rand_index]
 
-            arr.append(get_word)
+            result_arr.append(get_word)
 
-    rtn = ', '.join(map(str, arr))
+    rtn = ', '.join(map(str, result_arr))
     return rtn
 
 
