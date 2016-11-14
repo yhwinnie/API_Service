@@ -3,10 +3,11 @@ from collections import defaultdict
 import random
 from flask import Flask, request, url_for, jsonify
 import json
+import os
 
 app = Flask(__name__)
 
-@app.route('num_words/<num_words>', methods=["GET"])
+@app.route('/<num_words>', methods=["GET"])
 def readFiles(num_words):
     lst = []
     argument = "sherlock.rtf"
@@ -53,4 +54,5 @@ def stochastic(histogram):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=True, host='0.0.0.0', port=port)
