@@ -1,1 +1,1 @@
-web: python stochastic.py 
+web: gunicorn stochastic:app --log-file-
