@@ -6,7 +6,7 @@ import json
 
 app = Flask(__name__)
 
-@app.route('/<num_words>', methods=["GET"])
+@app.route('num_words/<num_words>', methods=["GET"])
 def readFiles(num_words):
     lst = []
     argument = "sherlock.rtf"
