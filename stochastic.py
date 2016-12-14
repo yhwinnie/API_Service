@@ -27,7 +27,8 @@ def readFiles(num_words):
 def histogram(lines):
     dictionary = defaultdict(int)
     delimeters = ["\\", ",", ";", ":", "\n", "-", "!", "?", "(", ")", "'s", \
-    "'\'", ".", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "}", "{"]
+    "'\'", ".", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "}", \
+    "{"]
 
     for line in lines:
         words = line.strip().translate(None, ''.join(delimeters)).split()
@@ -51,8 +52,7 @@ def stochastic(histogram):
         prob_total += val
         if random_index <= prob_total:
             return key
-
-
+# Allow running both modules and as scripts 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     app.run(debug=True, host='0.0.0.0', port=port)
