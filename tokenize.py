@@ -1,4 +1,5 @@
 import re
+import random
 
 
 def tokenize(text):
@@ -32,7 +33,6 @@ def markov_model(tokens):
         if dictionary == {}:
             dictionary[tup] = {}
         elif tup not in dictionary:
-            # word = tokens[index + 1]
             if (index + 1) < len(tokens):
                 word = tokens[index + 1]
                 dictionary[tup] = {word: 1}
@@ -42,11 +42,23 @@ def markov_model(tokens):
                 dictionary[tup][word] += 1
             else:
                 dictionary[tup][word] = 1
-    print(dictionary)
+    generate_sentences(dictionary, 10)
     return dictionary
 
-def generate_sentences(dictionary):
-    random_index = random.randint(1, dictionary)
+def generate_sentences(dictionary, sentence_len):
+    lst = []
+    #print(value_histogram)
+    for i in range(sentence_len):
+        key = random.choice(dictionary.keys())
+        value_histogram = dictionary[key]
+        random_index = random_index_generator(value_histogram)
+        #print(value_histogram)
+        lst.append(stochastic(value_histogram))
+
+    print(' '.join(lst))
+    return ' '.join(lst)
+
+
 
 
 
