@@ -42,39 +42,28 @@ def markov_model(tokens):
                 dictionary[tup][word] += 1
             else:
                 dictionary[tup][word] = 1
-    #for key, value in dictionary.items():
-        #print("key: ", key)
-        #print("value: ", value)
-        #print('\n')
+
     generate_sentences(dictionary, 10)
     return dictionary
 
 def generate_sentences(dictionary, sentence_len):
     lst = []
-    #print(value_histogram)
-    #for i in range(sentence_len):
+
     key = random.choice(dictionary.keys())
     key = key[0]
     lst.append(key)
 
     for i in range(sentence_len):
-        #print(key)
         for (dict_key, val) in dictionary.iteritems():
             if dict_key[0] == key:
-                #print(dict_key[0])
-                #print("A match")
+
                 value_histogram = dictionary[dict_key]
-                #print(value_histogram)
-        #print(key[0])
-                #print(value_histogram)
+
                 random_index = random_index_generator(value_histogram)
                 key = stochastic(value_histogram)
-                #print(key)
+                lst.append(key.lower())
 
-                lst.append(key)
-
-    #print(stochastic(dictionary))
-    #value_histogram = dictionary[key]
+    lst.append('.')
     print(' '.join(lst))
     return ' '.join(lst)
 
@@ -90,7 +79,6 @@ def stochastic(histogram):
     random_index = random_index_generator(histogram)
     prob_total = 0
     for key, val in histogram.iteritems():
-        #print(key, val)
         prob_total += val
         if random_index <= prob_total:
             return key
