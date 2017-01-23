@@ -23,11 +23,13 @@ def regex_text(text):
 
     clean_random_text = re.sub(r'Complete Text', '', clean_slashes)
 
-    return clean_random_text
+    clean_dots = re.sub(r'\.(?!\d)', '', clean_random_text)
+
+    return clean_dots
 
 
 
 
 if __name__ == '__main__':
-    regex_result = read("corpus.txt")
+    regex_result = read("corpus_clean copy.txt")
     print(regex_result)
