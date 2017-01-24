@@ -15,35 +15,38 @@ def split_on_white_space(text):
 
 def histogram(tokens):
     dictionary = {}
-    for word in tokens:
-        if dictionary == {}:
-            dictionary[word] = 1
-        elif word in dictionary:
-            dictionary[word] += 1
-        else:
-            dictionary[word] = 1
+    for index in range(len(tokens)):
+        if index < len(tokens) - 1:
+            if dictionary == {}:
+                dictionary[(tokens[index], tokens[index + 1])] = 1
+            elif (tokens[index], tokens[index + 1]) in dictionary:
+                dictionary[(tokens[index], tokens[index + 1])] += 1
+            else:
+                dictionary[(tokens[index], tokens[index + 1])] = 1
     return dictionary
 
 def markov_model(tokens):
     histogram_model = histogram(tokens)
+    #print(histogram_model)
     dictionary = {}
     index = 0
     for index in range(len(tokens)):
-        tup = (tokens[index], histogram_model[tokens[index]])
-        if dictionary == {}:
-            dictionary[tup] = {}
-        elif tup not in dictionary:
-            if (index + 1) < len(tokens):
-                word = tokens[index + 1]
-                dictionary[tup] = {word: 1}
-        else:
-            word = tokens[index + 1]
-            if word in dictionary[tup]:
-                dictionary[tup][word] += 1
-            else:
-                dictionary[tup][word] = 1
-
-    generate_sentences(dictionary, 10)
+        if index < len(tokens) - 2:
+            tup = ((tokens[index], tokens[index + 1]), histogram_model[(tokens[index], tokens[index + 1])])
+            if dictionary == {}:
+                dictionary[tup] = {}
+            elif tup not in dictionary:
+                if (index + 3) < len(tokens):
+                    word = (tokens[index + 2], tokens[index + 3])
+                    dictionary[tup] = {word: 1}
+                else:
+                    word = (tokens[index + 2], tokens[index + 3])
+                    if word in dictionary[tup]:
+                        dictionary[tup][word] += 1
+                    else:
+                        dictionary[tup][word] = 1
+    #print(dictionary)
+    generate_sentences(dictionary, 7)
     return dictionary
 
 def generate_sentences(dictionary, sentence_len):
@@ -51,18 +54,25 @@ def generate_sentences(dictionary, sentence_len):
 
     key = random.choice(dictionary.keys())
     key = key[0]
-    lst.append(key)
+    lst.append(key[0])
+    lst.append(key[1])
 
     for i in range(sentence_len):
+        #print("KEY")
+        #print(key)
         for (dict_key, val) in dictionary.iteritems():
+            #print(dict_key)
             if dict_key[0] == key:
+                #print("A match!")
 
                 value_histogram = dictionary[dict_key]
 
                 random_index = random_index_generator(value_histogram)
                 key = stochastic(value_histogram)
-                lst.append(key.lower())
-
+                #print(key)
+                lst.append(key[0].lower())
+                lst.append(key[1].lower())
+    #print(lst)
     lst.append('.')
     print(' '.join(lst))
     return ' '.join(lst)
