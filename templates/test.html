@@ -7,9 +7,17 @@
 		<link rel="stylesheet" href="/static/css/style.css" />
     </head>
     <body ng-app="myApp">
-        <p>{{ sentence }}</p>
-        <button type="button">Generate a new sentence!</button>
+        <script type="text/javascript">
+            function changeText(text) {
+                document.getElementById('pText').innerHTML=text;
 
+            }
+        </script>
+        <div>
+        <h1>{{ sentence }}</h1>
+        <img src="http://pixel.nymag.com/imgs/daily/vulture/2016/08/11/11-obama-sex-playlist.w529.h529.jpg">
+        </div>
+        <input type="button" value="Generate a new sentence" onClick="window.location.reload()"> 
 
     </body>
 </html>
