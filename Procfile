@@ -1,1 +1,1 @@
-web: python stochastic.py
+web: python app.py
