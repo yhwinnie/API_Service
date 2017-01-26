@@ -36,6 +36,13 @@ def clean_corpus(text):
     # Replace all dots with *END
     text = text.replace('.', ' ENDEND ')
 
+    text = text.replace('U ENDEND S ENDEND', 'United States ')
+
+    text = text.replace('U ENDEND N ENDEND', 'United Nations')
+
+    text = text.replace('Mr ENDEND ', 'Mr.')
+
+
     return text
 
 
