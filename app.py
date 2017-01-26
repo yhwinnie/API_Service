@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import unicode_literals
 from flask import Flask, render_template, request, redirect
 import re
 import random

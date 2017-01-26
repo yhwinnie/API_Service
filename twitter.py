@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 import os
 print(os.environ)
 from flask import Flask, render_template, request, redirect
