@@ -1,9 +1,10 @@
 #!/usr/bin/env python
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
 import re
 import random
 import markov
 import os
+import twitter
 
 tokens = markov.read(open("corpus_clean.txt").read())
 #print(tokens)
@@ -27,11 +28,12 @@ def main():
 
     return render_template("test.html", sentence=' '.join(sentence).replace(" ENDEND", '.'), img_src=img)
 
-@app.route('/hello')
-def hello():
 
-    return render_template("test.html", sentence=random_sentence, img_src=img)
-
+@app.route('/tweet', methods=['POST'])
+def tweet():
+    status = request.form['sentence']
+    twitter.tweet(status)
+    return redirect('/')
 
 if __name__ == '__main__':
     import sys

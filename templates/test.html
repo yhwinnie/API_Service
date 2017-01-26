@@ -1,10 +1,6 @@
 <!doctype html>
 <html>
     <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
-		<script src="http://code.angularjs.org/1.5.3/angular-route.min.js"></script>
-		<script src="/static/js/app.js"></script>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
         <style type="text/css">
 
         body {
@@ -35,9 +31,22 @@
         }
 
         img {
-            position: : relative;
+            position: relative;
             margin: 50px;
             border-radius: 10px;
+        }
+
+        .tweet button {
+            margin-left: calc(33%);
+            background-color: #4CAF50;
+            color: white;
+            font-size: 20px;
+            font-family: 'Avenir Next';
+            border: 2px solid #4CAF50; /* Green */
+            width: 500px;
+            height: 50px;
+            border-radius: 10px;
+
         }
 
         input {
@@ -64,8 +73,12 @@
         </div>
         <input type="button" class="button" value="Generate a new sentence" onClick="window.location.reload()" height=50, width=500>
     </div>
-
-
-
+    <blockquote>{{ sentence }}</blockquote>
+        <form action="/tweet" method="post">
+            <input type="hidden" name="sentence" value="{{ sentence }}">
+            <div class="tweet">
+                <button type="submit">Tweet this</button>
+            </div>
+        </form>
     </body>
 </html>

@@ -65,6 +65,8 @@ def generate_sentences(dictionary):
 
         lst.append(random_next)
 
+    lst.append(" -- Barack Obama")
+
     text = ' '.join(lst).replace(" ENDEND", '.')
     print(text)
 
