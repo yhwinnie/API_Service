@@ -8,9 +8,16 @@ import dotenv
 dotenv.load_dotenv('.env')
 
 consumer_key = os.environ.get('TWITTER_CONSUMER_KEY')
+consumer_key = consumer_key.encode('utf-8')
 consumer_secret = os.environ.get('TWITTER_CONSUMER_SECRET')
+consumer_secret = consumer_secret.encode('utf-8')
+
 access_token = os.environ.get('TWITTER_ACCESS_TOKEN')
+access_token = access_token.encode('utf-8')
+
 access_token_secret = os.environ.get('TWITTER_ACCESS_TOKEN_SECRET')
+access_token_secret = access_token_secret.encode('utf-8')
+
 
 from requests_oauthlib import OAuth1Session
 
