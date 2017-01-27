@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 import os
 print(os.environ)
 from flask import Flask, render_template, request, redirect
+from requests_oauthlib import OAuth1Session
 
 
 import dotenv
@@ -19,7 +20,6 @@ access_token_secret = os.environ.get('TWITTER_ACCESS_TOKEN_SECRET')
 access_token_secret = access_token_secret.encode('utf-8')
 
 
-from requests_oauthlib import OAuth1Session
 
 session = OAuth1Session(consumer_key,
                         client_secret=consumer_secret,
